@@ -2,7 +2,12 @@ import React, { useState } from 'react'
 import { Image, Platform, StyleSheet, Text, View, Button } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
-const HomeScreen = () => {
+const HomeScreen = ({ route }) => {
+  const [number, setNumber] = useState(0)
+  const randomSelection = () => {
+    const randomNumber = Math.floor(Math.random() * 100) + 1
+    setNumber(randomNumber)
+  }
   return (
     <View style={styles.container}>
       <ScrollView
@@ -21,9 +26,14 @@ const HomeScreen = () => {
         </View>
 
         <View style={styles.getStartedContainer}>
-          <Text style={styles.getStartedText}>Select A Theater</Text>
+          <Text style={styles.getStartedText}>{number}</Text>
+          <Button title="Start Raffle!" onPress={randomSelection} />
         </View>
       </ScrollView>
+
+      <View style={styles.tabBarInfoContainer}>
+        <Text style={styles.tabBarInfoText}>Theater {route.name}</Text>
+      </View>
     </View>
   )
 }
